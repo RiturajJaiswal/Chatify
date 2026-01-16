@@ -1,0 +1,5 @@
+{
+  "name": "chatify-server",
+  "runtime": "python311",
+  "builder": "nixpacks"
+}

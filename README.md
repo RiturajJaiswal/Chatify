@@ -35,22 +35,28 @@ A secure, End-to-End Encrypted chat application built with Python.
 
 ## Deploying 24/7 (Free Cloud Hosting)
 
-To keep your server online when your computer is off, deploy to **Render**:
+To keep your server online when your computer is off, deploy to **Railway** (free):
 
-1.  Push this project to **GitHub**.
-2.  Sign up at [render.com](https://render.com).
-3.  Click **New +** -> **Web Service**.
-4.  Connect your GitHub repository.
-5.  Render will automatically detect `render.yaml` and configure everything.
-6.  Once deployed, copy the **Render URL** (e.g., `https://chatify-xyz.onrender.com`).
-7.  Use this URL in your Mobile/Desktop app to connect!
+1. Push this project to **GitHub** (already done ✅).
+2. Sign up at [railway.app](https://railway.app).
+3. Click **New Project** → **Deploy from GitHub Repo**.
+4. Select your `Chatify` repository.
+5. Railway will auto-detect the Python project and deploy using `railway.json`.
+6. Once deployed, copy the **Railway URL** (visible in dashboard).
+7. Use this URL in your Mobile/Desktop app to connect!
 
-## Android App (Mobile)
-This project includes a .NET MAUI project configured for **Android**.
+## Automatic APK Build (GitHub Actions)
 
-- **Project Location**: `client-mobile/`
-- **Build Requirements**: .NET 8 SDK + Android Workload (`dotnet workload install android`)
-- **Emulator Access**: Use `http://10.0.2.2:8000` to access localhost from Android Emulator.
+The APK is automatically built whenever you push code to GitHub:
+
+1. Go to your GitHub repository
+2. Click **"Actions"** tab
+3. Select **"Build APK"** workflow
+4. Click the latest successful build
+5. Download the **`chatify-apk`** artifact (the APK file)
+6. Share this APK with your friends to install on their Android phones!
+
+**Automatic Release:** Tag your commit with a version (e.g., `v1.0.0`) to create an automatic release with the APK downloadable from the Releases page.
 - Real-time messaging
 - End-to-End Encryption (Server cannot see messages)
 - Modern Dark Mode UI
