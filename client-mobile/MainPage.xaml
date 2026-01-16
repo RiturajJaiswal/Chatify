@@ -69,9 +69,9 @@
             </CollectionView>
 
             <!-- Input Area -->
-            <Grid Grid.Row="3" ColumnDefinitions="*,Auto" ColumnSpacing="10">
+            <Grid Grid.Row="3" ColumnDefinitions="*,Auto" ColumnSpacing="10" Padding="10">
                 <Entry x:Name="MessageInput" Placeholder="Type a message..." ReturnType="Send" Completed="MessageInput_Completed"/>
-                <Button x:Name="SendBtn" Grid.Column="1" Text="Send" Clicked="SendBtn_Clicked" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White"/>
+                <Button x:Name="SendBtn" Grid.Column="1" Text="Send" Clicked="SendBtn_Clicked" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White" Padding="15,0"/>
             </Grid>
         </Grid>
     </Grid>
