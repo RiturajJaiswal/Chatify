@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ChatifyMobile.MainPage"
+             BackgroundColor="{DynamicResource SecondaryColor}">
+
+    <Grid>
+        <!-- Login View -->
+        <StackLayout x:Name="LoginView" VerticalOptions="Center" Padding="30" Spacing="20">
+            <Label Text="Welcome to Chatify" FontSize="32" FontAttributes="Bold" HorizontalOptions="Center" TextColor="{DynamicResource PrimaryColor}"/>
+            
+            <Label Text="Username" TextColor="Gray"/>
+            <Entry x:Name="UsernameInput" Placeholder="Enter your username" />
+
+            <Label Text="Server URL" TextColor="Gray"/>
+            <Entry x:Name="ServerUrlInput" Placeholder="http://10.0.2.2:8000" Text="http://10.0.2.2:8000" />
+            <Label Text="Note: Use 10.0.2.2 for local emulator access to host"/>
+
+            <Button x:Name="ConnectBtn" Text="Connect" Clicked="ConnectBtn_Clicked" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White"/>
+            <Label x:Name="StatusText" TextColor="Red" HorizontalOptions="Center"/>
+        </StackLayout>
+
+        <!-- Chat View -->
+        <Grid x:Name="ChatView" IsVisible="False" RowDefinitions="Auto,Auto,*,Auto" Padding="10">
+            
+            <!-- Header -->
+            <Label Text="Online Users" FontAttributes="Bold" FontSize="18" Padding="5"/>
+            
+            <!-- Users List (Horizontal) -->
+            <CollectionView x:Name="UsersList" Grid.Row="1" HeightRequest="60" SelectionMode="Single" SelectionChanged="UsersList_SelectionChanged">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" CornerRadius="10" BackgroundColor="#E0E0E0" HasShadow="False">
+                            <Label Text="{Binding Username}" VerticalOptions="Center" FontAttributes="Bold" TextColor="Black"/>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState Name="Normal" />
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
+                                            <Setter TargetName="Label" Property="TextColor" Value="White" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Chat Area -->
+            <CollectionView x:Name="MessagesList" Grid.Row="2" Margin="0,10">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="5">
+                            <Frame CornerRadius="10" Padding="10" BackgroundColor="#333333" HasShadow="True">
+                                <StackLayout>
+                                    <Label Text="{Binding Sender}" TextColor="{DynamicResource PrimaryColor}" FontAttributes="Bold" FontSize="12"/>
+                                    <Label Text="{Binding Content}" TextColor="White" />
+                                    <Label Text="{Binding Time}" TextColor="Gray" FontSize="10" HorizontalOptions="End"/>
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Input Area -->
+            <Grid Grid.Row="3" ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                <Entry x:Name="MessageInput" Placeholder="Type a message..." ReturnType="Send" Completed="MessageInput_Completed"/>
+                <Button x:Name="SendBtn" Grid.Column="1" Text="Send" Clicked="SendBtn_Clicked" BackgroundColor="{DynamicResource PrimaryColor}" TextColor="White"/>
+            </Grid>
+        </Grid>
+    </Grid>
+
+</ContentPage>

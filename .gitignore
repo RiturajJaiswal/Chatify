@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# .NET
+bin/
+obj/
+.vs/
+*.user
+*.pdb
+*.cache
+*.dll
+*.exe
+*.apk
+*.aab
+
+# VS Code
+.vscode/
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# GitHub Copilot (local instructions)
+.github/copilot-instructions.md
