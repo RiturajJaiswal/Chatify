@@ -4,7 +4,7 @@ from fastapi import FastAPI
 
 app = FastAPI()
 sio = socketio.AsyncServer(async_mode='asgi', cors_allowed_origins='*')
-socket_app = socketio.ASGIApp(sio, app)
+app = socketio.ASGIApp(sio, app)
 
 # Store connected clients: {sid: {username: str, public_key: str}}
 clients = {}
@@ -52,4 +52,4 @@ async def private_message(sid, data):
         }, room=to_sid)
 
 if __name__ == "__main__":
-    uvicorn.run("main:socket_app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
