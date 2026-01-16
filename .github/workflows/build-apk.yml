@@ -39,19 +39,24 @@ jobs:
           -f net10.0-android \
           -c Release \
           -p:AndroidPackageFormat=apk \
-          -p:BuildInParallel=false \
-          -v diag 2>&1 | tee build.log
+          -p:BuildInParallel=false
     
-    - name: Find APK files
+    - name: List all build output
       if: always()
-      run: find client-mobile -name "*.apk" -type f
+      run: |
+        echo "=== Looking for APK files ==="
+        find client-mobile -name "*.apk" -o -name "*.aab" | head -20
+        echo ""
+        echo "=== Full bin/Release directory structure ==="
+        find client-mobile/bin/Release -type f 2>/dev/null | head -50
     
     - name: Upload APK Artifact
       if: success()
       uses: actions/upload-artifact@v4
       with:
         name: chatify-apk
-        path: client-mobile/bin/Release/net10.0-android/publish/
+        path: |
+          client-mobile/bin/Release/**/
         retention-days: 30
     
     - name: Upload build log on failure
