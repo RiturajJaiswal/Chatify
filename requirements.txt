@@ -2,9 +2,4 @@ fastapi
 uvicorn
 gunicorn
 python-socketio
-aiofiles
-websockets
-requests
-customtkinter
-pynacl
-sqlalchemy
+
