@@ -34,7 +34,7 @@ jobs:
       run: dotnet publish client-mobile/ChatifyMobile.csproj -f net10.0-android -c Release -p:AndroidPackageFormat=apk -p:BuildInParallel=false
     
     - name: Upload APK Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: chatify-apk
         path: client-mobile/bin/Release/net10.0-android/publish/*.apk
