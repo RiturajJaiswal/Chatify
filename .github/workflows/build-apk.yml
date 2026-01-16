@@ -42,12 +42,16 @@ jobs:
           -p:BuildInParallel=false \
           -v diag 2>&1 | tee build.log
     
+    - name: Find APK files
+      if: always()
+      run: find client-mobile -name "*.apk" -type f
+    
     - name: Upload APK Artifact
       if: success()
       uses: actions/upload-artifact@v4
       with:
         name: chatify-apk
-        path: client-mobile/bin/Release/net10.0-android/publish/*.apk
+        path: client-mobile/bin/Release/net10.0-android/publish/
         retention-days: 30
     
     - name: Upload build log on failure
