@@ -35,15 +35,51 @@ A secure, End-to-End Encrypted chat application built with Python.
 
 ## Deploying 24/7 (Free Cloud Hosting)
 
-To keep your server online when your computer is off, deploy to **Railway** (free):
+### Option 1: PythonAnywhere (Recommended - Always Free)
+
+**Best for:** Always-on, 24/7 uptime with NO sleeping
+
+1. Sign up at [pythonanywhere.com](https://pythonanywhere.com) (free account)
+2. Go to **"Web"** tab → **"Add a new web app"**
+3. Choose **Python 3.11** → **"Manual configuration"**
+4. In **"Bash console"**, run:
+   ```bash
+   cd ~
+   git clone https://github.com/RiturajJaiswal/Chatify.git mysite
+   cd mysite
+   python3.11 -m venv .venv
+   source .venv/bin/activate
+   pip install -r requirements.txt
+   ```
+5. Go back to **Web settings**:
+   - **Source code:** `/home/yourusername/mysite`
+   - **Virtualenv:** `/home/yourusername/mysite/.venv`
+6. **WSGI configuration file** - Click to edit and replace with content from `pythonanywhere_wsgi.py`
+7. Click **"Reload"** button (green)
+8. Your server URL: `https://yourusername.pythonanywhere.com`
+
+### Option 2: Railway (Sleeps after 15 min inactivity)
 
 1. Push this project to **GitHub** (already done ✅).
 2. Sign up at [railway.app](https://railway.app).
 3. Click **New Project** → **Deploy from GitHub Repo**.
 4. Select your `Chatify` repository.
-5. Railway will auto-detect the Python project and deploy using `railway.json`.
-6. Once deployed, copy the **Railway URL** (visible in dashboard).
-7. Use this URL in your Mobile/Desktop app to connect!
+5. Railway will auto-detect the Python project and deploy using `Procfile`.
+6. Once deployed, copy the **Railway URL**.
+
+### Option 3: Render (Free, Sleeps after inactivity)
+
+1. Sign up at [render.com](https://render.com)
+2. Click **New +** → **Web Service**
+3. Connect your GitHub repo
+4. Use `render.yaml` config
+5. Deploy!
+
+---
+
+**Update your clients with the new server URL:**
+- Edit [client-csharp/MainWindow.xaml.cs](client-csharp/MainWindow.xaml.cs) - Change `DEFAULT_SERVER_URL`
+- Edit [client-mobile/MainPage.xaml.cs](client-mobile/MainPage.xaml.cs) - Change `DEFAULT_SERVER_URL`
 
 ## Automatic APK Build (GitHub Actions)
 
