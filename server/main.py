@@ -2,12 +2,22 @@ import socketio
 import uvicorn
 from fastapi import FastAPI
 
-app = FastAPI()
+# Create FastAPI app first
+fast_app = FastAPI()
+
+# Create Socket.IO server
 sio = socketio.AsyncServer(async_mode='asgi', cors_allowed_origins='*')
-app = socketio.ASGIApp(sio, app)
+
+# Create wrapped app
+app = socketio.ASGIApp(sio, fast_app)
 
 # Store connected clients: {sid: {username: str, public_key: str}}
 clients = {}
+
+# Health check endpoint
+@fast_app.get("/")
+async def health():
+    return {"status": "ok"}
 
 @sio.event
 async def connect(sid, environ):
@@ -52,4 +62,4 @@ async def private_message(sid, data):
         }, room=to_sid)
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=8000)
